@@ -3,67 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coliexpresse — Suivi de colis</title>
+  <title>Coliexpresse | Système de suivi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    /* Personnalisation de la barre de défilement pour un look pro */
-    ::-webkit-scrollbar { width: 8px; }
+    /* Barre de défilement pro */
+    ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+    ::-webkit-scrollbar-thumb { background: #333; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
   </style>
 </head>
-<body class="bg-black text-zinc-100 min-h-screen selection:bg-zinc-800 selection:text-white">
+<body class="bg-black text-gray-200 min-h-screen selection:bg-gray-800 selection:text-white">
 
-  <header class="sticky top-0 z-50 border-b border-zinc-900 bg-black/80 backdrop-blur-md">
-    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+  <header class="border-b border-gray-900 bg-black sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-          <span class="text-black font-bold text-xl leading-none tracking-tighter">C</span>
-        </div>
-        <span class="text-lg font-semibold tracking-tight">Coliexpresse</span>
+        <div class="w-7 h-7 bg-white text-black flex items-center justify-center font-bold text-lg">C</div>
+        <span class="text-white font-semibold tracking-wide">Coliexpresse</span>
       </div>
-      <span class="text-xs font-medium uppercase tracking-widest text-zinc-500">Plateforme de suivi</span>
+      <span class="text-xs font-mono text-gray-500 uppercase tracking-widest">Tracking System</span>
     </div>
   </header>
 
-  <main class="relative z-10 max-w-4xl mx-auto px-6 pt-24 pb-24">
+  <main class="max-w-3xl mx-auto px-6 pt-20 pb-24">
     
-    <section class="text-center mb-16">
-      <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white">
-        Suivi de colis <br class="hidden md:block text-zinc-500">
-        <span class="text-zinc-500">simplifié.</span>
-      </h1>
-      <p class="text-zinc-400 text-lg max-w-xl mx-auto">
-        Détection automatique du transporteur et historique détaillé de vos expéditions en temps réel.
-      </p>
+    <section class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Suivi de colis.</h1>
+      <p class="text-gray-400 text-lg">Consultez l'historique complet et chaque étape de votre expédition en temps réel.</p>
     </section>
 
-    <section class="bg-zinc-950 border border-zinc-800 rounded-2xl p-2 shadow-2xl shadow-white/[0.02]">
-      <div class="flex flex-col md:flex-row gap-2">
-        <input 
-          id="trackingInput" 
-          type="text"
-          class="flex-1 bg-transparent outline-none px-6 py-4 text-white placeholder:text-zinc-600" 
-          placeholder="Entrez votre numéro de suivi..."
-        >
-        <div class="w-full md:w-px bg-zinc-800 my-2 md:my-0"></div>
-        <select id="carrierSelect" class="bg-transparent outline-none border-none px-6 py-4 text-zinc-300 cursor-pointer appearance-none">
-          <option value="auto" class="bg-zinc-900 text-white">Transporteur auto</option>
-          <option value="laposte" class="bg-zinc-900 text-white">La Poste / Colissimo</option>
-          <option value="chronopost" class="bg-zinc-900 text-white">Chronopost</option>
-          <option value="dhl" class="bg-zinc-900 text-white">DHL</option>
-          <option value="ups" class="bg-zinc-900 text-white">UPS</option>
-          <option value="fedex" class="bg-zinc-900 text-white">FedEx</option>
-        </select>
-        <button 
-          onclick="trackPackage()" 
-          class="bg-white hover:bg-zinc-200 text-black transition-colors rounded-xl px-8 py-4 font-semibold whitespace-nowrap"
-        >
-          Rechercher
-        </button>
-      </div>
+    <section class="bg-black border border-gray-800 flex flex-col md:flex-row focus-within:border-gray-500 transition-colors">
+      <input 
+        id="trackingInput" 
+        type="text"
+        class="flex-1 bg-transparent outline-none px-6 py-4 text-white placeholder-gray-600" 
+        placeholder="Saisir le numéro de suivi"
+      >
+      <div class="w-full md:w-px bg-gray-800"></div>
+      <select id="carrierSelect" class="bg-transparent border-none px-6 py-4 text-gray-400 outline-none cursor-pointer appearance-none md:w-64">
+        <option value="auto" class="bg-black text-white">Détection automatique</option>
+        <option value="fr.laposte" class="bg-black text-white">La Poste / Colissimo</option>
+        <option value="fr.chronopost" class="bg-black text-white">Chronopost</option>
+        <option value="us.dhl" class="bg-black text-white">DHL</option>
+        <option value="us.ups" class="bg-black text-white">UPS</option>
+        <option value="us.fedex" class="bg-black text-white">FedEx</option>
+      </select>
+      <button 
+        onclick="trackPackage()" 
+        class="bg-white hover:bg-gray-200 text-black px-10 py-4 font-semibold transition-colors"
+      >
+        Rechercher
+      </button>
     </section>
 
     <section id="result" class="mt-12"></section>
@@ -79,8 +70,8 @@
 
       if (!number) {
         result.innerHTML = `
-          <div class="border border-red-900/30 bg-red-950/20 rounded-2xl p-6 text-center text-red-400 text-sm font-medium">
-            Veuillez entrer un numéro de suivi valide.
+          <div class="border border-gray-800 bg-gray-900/50 p-6 text-gray-400 text-sm">
+            Veuillez renseigner un numéro de suivi.
           </div>`;
         numberInput.focus();
         return;
@@ -88,86 +79,50 @@
 
       // État de chargement
       result.innerHTML = `
-        <div class="border border-zinc-800 rounded-2xl p-12 text-center text-zinc-500 animate-pulse flex flex-col items-center justify-center gap-4">
-          <div class="w-6 h-6 border-2 border-zinc-600 border-t-white rounded-full animate-spin"></div>
-          Interrogation des serveurs en cours...
+        <div class="border border-gray-900 p-12 flex flex-col items-center justify-center gap-4">
+          <div class="w-5 h-5 border-2 border-gray-800 border-t-white rounded-full animate-spin"></div>
+          <span class="text-gray-500 text-sm font-mono uppercase tracking-widest">Connexion WhereParcel...</span>
         </div>`;
 
       try {
-        // Correction de l'appel API : on injecte proprement le numéro de suivi dans l'URL
-        const apiUrl = `https://coliexpresse.vercel.app/api/track?tracking=${encodeURIComponent(number)}`;
+        // Appel propre vers ton Vercel (qui fait le pont avec WhereParcel)
+        // On passe le transporteur en paramètre au cas où ton backend en a besoin
+        const apiUrl = `https://coliexpresse.vercel.app/api/track?tracking=${encodeURIComponent(number)}&carrier=${encodeURIComponent(carrier)}`;
         
         const response = await fetch(apiUrl);
 
         if (!response.ok) {
-          throw new Error('Impossible de récupérer les informations pour ce numéro.');
+          throw new Error('Données introuvables ou erreur serveur.');
         }
 
-        const data = await response.json();
+        const json = await response.json();
         
-        // Sécurisation de l'accès aux données (évite les crashs si l'API renvoie un format inattendu)
-        const tracking = data?.data?.tracking || data;
+        // Sécurisation de la lecture des données (gère plusieurs formats de réponse WhereParcel/Vercel)
+        const tracking = json.data?.tracking || json.tracking || json.data || json;
 
         if (!tracking || Object.keys(tracking).length === 0) {
-           throw new Error('Aucune information trouvée pour ce colis.');
+           throw new Error('Aucun historique trouvé pour ce numéro.');
         }
 
-        const checkpoints = tracking.checkpoints || [];
+        // Récupération du tableau des étapes de WhereParcel
+        const events = tracking.events || tracking.checkpoints || tracking.history || [];
         
-        // Définition de la pastille de couleur selon le statut (vert si livré, bleu sinon)
-        const isDelivered = tracking.tag === 'Delivered' || tracking.tag === 'Livré';
-        const statusColorClass = isDelivered ? 'bg-emerald-500' : 'bg-blue-500';
+        // Définition de l'unique touche de couleur (Vert pour livré, Bleu pour le reste)
+        const currentStatus = tracking.tag || tracking.status || 'En cours';
+        const isDelivered = currentStatus.toLowerCase().includes('delivered') || currentStatus.toLowerCase().includes('livré');
+        const statusDot = isDelivered ? 'bg-emerald-500' : 'bg-blue-500';
 
-        result.innerHTML = `
-          <div class="border border-zinc-800 bg-zinc-950 rounded-2xl p-8 shadow-xl">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-zinc-800/50">
-              <div>
-                <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Transporteur</p>
-                <h2 class="text-2xl font-semibold text-white capitalize">${tracking.slug || (carrier !== 'auto' ? carrier : 'Non identifié')}</h2>
-              </div>
-              <div>
-                <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Statut actuel</p>
-                <div class="flex items-center gap-3 mt-1">
-                  <span class="w-2.5 h-2.5 rounded-full ${statusColorClass} shadow-[0_0_10px_rgba(255,255,255,0.2)]"></span>
-                  <p class="text-white text-xl font-medium">${tracking.tag || 'En cours de traitement'}</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-8">
-              <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Historique des événements</p>
-              
-              <div class="space-y-6">
-                ${checkpoints.map((item, index) => {
-                  const isFirst = index === 0;
-                  return `
-                  <div class="relative pl-8 border-l border-zinc-800 last:border-transparent">
-                    <div class="absolute w-3 h-3 bg-black border-2 ${isFirst ? 'border-white' : 'border-zinc-700'} rounded-full -left-[6.5px] top-1.5"></div>
-                    
-                    <div class="${isFirst ? 'text-white font-medium' : 'text-zinc-400'} text-base">
-                      ${item.message || 'Mise à jour du statut'}
-                    </div>
-                    
-                    <div class="text-sm text-zinc-600 mt-1 flex items-center gap-2">
-                      ${item.location ? `<span>${item.location}</span> <span>•</span>` : ''}
-                      <span>${item.checkpoint_time ? new Date(item.checkpoint_time).toLocaleString('fr-FR', {
-                        day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
-                      }) : 'Date inconnue'}</span>
-                    </div>
-                  </div>
-                `}).join('') || '<p class="text-zinc-500 text-sm italic">Aucun événement enregistré pour le moment.</p>'}
-              </div>
-            </div>
-
-          </div>`;
-      } catch (e) {
-        result.innerHTML = `
-          <div class="border border-red-900/30 bg-red-950/20 rounded-2xl p-6 text-red-400 text-sm font-medium">
-            Erreur : ${e.message}
-          </div>`;
-      }
-    }
-  </script>
-</body>
-</html>
+        // Construction de la timeline pour CHAQUE étape
+        let timelineHTML = '';
+        if (events.length === 0) {
+          timelineHTML = '<p class="text-gray-500 text-sm">Aucune étape détaillée disponible pour le moment.</p>';
+        } else {
+          timelineHTML = '<div class="space-y-6">';
+          events.forEach((event, index) => {
+            const isFirst = index === 0; // Le dernier événement enregistré (plus récent)
+            const message = event.message || event.description || event.status || 'Mise à jour du statut';
+            const location = event.location || event.city || '';
+            const dateStr = event.checkpoint_time || event.date || event.timestamp;
+            const date = dateStr ? new Date(dateStr).toLocaleString('fr-FR', {
+              day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+            }) : 'Date inconnue';
